@@ -4446,6 +4446,12 @@ ncname@1.0.x:
   dependencies:
     xml-char-classes "^1.0.0"
 
+nedb-promises@^1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/nedb-promises/download/nedb-promises-1.2.0.tgz#9fe94552ff420e53eff508909218847f551c5e7e"
+  dependencies:
+    nedb "^1.8.0"
+
 nedb@^1.8.0:
   version "1.8.0"
   resolved "http://registry.npm.taobao.org/nedb/download/nedb-1.8.0.tgz#0e3502cd82c004d5355a43c9e55577bd7bd91d88"
