@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <!--<img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="right-side">
         <div class="doc">
@@ -9,7 +9,15 @@
           
         </div>
       </div>
-    </main>
+    </main>-->
+      <n3-button @click.native="openLeft">N3</n3-button>
+    <n3-aside  placement="left" title="Title" width="350px" ref="asideLeft">
+  <h4>左侧侧边栏</h4>
+  <p>...</p>
+  <p>...</p>
+  <p>...</p>
+  <n3-button @click.native="closeLeft">关闭</n3-button>
+</n3-aside>
   </div>
 </template>
 
@@ -41,14 +49,14 @@
                   type:"TXT"
                };
  
-          this.$db.insert(obj, function (err, result) {   // Callback is optional
+          this.$clipdb.insert(obj, function (err, result) {   // Callback is optional
             // newDoc is the newly inserted document, including its _id
             // newDoc has no key called notToBeSaved since its value was undefined
             console.log("insert",err,result)
           });
       },
       qry () {
-          this.$db.find({ tag:"unsort"}, function (err, docs) {
+          this.$clipdb.find({ tag:"unsort"}, function (err, docs) {
             // docs contains Omicron Persei 8, whose humans have more than 5 genders (7).
             console.log("qry",err,docs)
           });
@@ -63,8 +71,12 @@
           this.insertTXT(this.clip) 
           this.lastClip = read; //记录上次复制的内容
           console.log(read)
+          this.qry();
         }
-      }
+      },
+       openLeft () {
+      this.$refs.asideLeft.open()
+    }
     }
   }
 </script>

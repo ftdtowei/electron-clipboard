@@ -21,7 +21,9 @@
     "postinstall": ""
   },
   "dependencies": {
+    "N3-components": "^2.4.4",
     "axios": "^0.16.1",
+    "element-ui": "^2.3.4",
     "nedb": "^1.8.0",
     "nedb-promises": "^1.2.0",
     "vue": "^2.3.3",
