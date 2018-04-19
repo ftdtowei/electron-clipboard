@@ -1,22 +1,33 @@
 <template>
-  <div >
-    <!--<img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="right-side">
-        <div class="doc">
-          <button @click="clipboard()">{{clip}}</button>
-          <button @click="qry()">qry</button>
-          
-        </div>
-      </div>
-    </main>-->
-      <n3-button @click.native="openLeft">N3</n3-button>
-      <n3-aside  placement="left" title="标签" width="150px" ref="asideLeft">
+  <div style="padding:0px 10px 10px 10px">
+      <!-- 顶部内容 -->
+          <div style="background:#fff;padding:8px;">
+            <n3-tooltip content="查看标签" placement="bottom" trigger="hover">
+              <n3-button @click.native="openLeft"><n3-icon type="bars"></n3-icon></n3-button>
+            </n3-tooltip>
+            <n3-tooltip content="点击清空" placement="bottom" trigger="hover">
+              <n3-button v-bind:badge="clipList.length" @click.native="clean" type="danger" style="float:right"><n3-icon type="trash-o"></n3-icon></n3-button>
+            </n3-tooltip>
+          </div>
+
+      <!-- 侧栏 -->
+      <n3-aside  placement="left" title="标签" width="150px" ref="asideLeft" :header="false">
         <p>...</p>
         <p>...</p>
         <p>...</p>
-        <n3-button @click.native="closeLeft">关闭</n3-button>
       </n3-aside>
+     <!-- 剪切板 -->
+     <div style="height:450px;overflow:scroll;overflow-x:hidden;">
+        <n3-card style="padding:10px 10px 20px 10px;margin:10px" :hover="true" v-for="(item, index)  in clipList">
+            <p v-on:click="copyContent(item)">{{item.content}}</p>
+            <div style="">
+              <p style="font-size:12px;float:left">{{item.date | date}}</p>
+              <n3-icon type="star-o" style="float:right;cursor:pointer" ></n3-icon>
+            </div>
+        </n3-card> 
+    </div>
+
+  
   </div>
 </template>
 
@@ -30,17 +41,20 @@
             return {
                 interval:{},
                 clip:"",
-                lastClip:{}
+                lastClip:{},
+                clipList:[]
             };
         },
     mounted(){
       var self = this;
-     this.interval =  setInterval(function(){ 
+      this.qry();
+      this.interval =  setInterval(function(){ 
             self.clipboard();
         },100)
     },
     methods: {
       insertTXT (str) {
+        var self = this
                 var obj = { 
                   content:str,
                   date:Date.parse(new Date()),
@@ -51,115 +65,75 @@
           this.$clipdb.insert(obj, function (err, result) {   // Callback is optional
             // newDoc is the newly inserted document, including its _id
             // newDoc has no key called notToBeSaved since its value was undefined
-            console.log("insert",err,result)
+             self.clipList.unshift(result)
           });
       },
       qry () {
-          this.$clipdb.find({ tag:"unsort"}, function (err, docs) {
-            // docs contains Omicron Persei 8, whose humans have more than 5 genders (7).
-            console.log("qry",err,docs)
-          });
+        var self =this
+          // this.$clipdb.find({ tag:"unsort"}, function (err, docs) {
+          //   self.clipList = docs
+          // });
+          this.$clipdb.find({ tag:"unsort"}).sort({ date: -1 }).exec(function (err, docs) {
+        // docs is [doc1, doc3, doc2]
+        self.clipList = docs
+        });
       },
       clipboard(){
-        // this.$electron.clipboard.writeText('String')
 
         var read = this.$electron.clipboard.readText()//文本类型
+
+        if (read === null || read === undefined || read === '') { 
+          return;
+        } 
 
         if(read !="" &&  read != this.lastClip){//重复的话不进行存储
           this.clip  = read;
           this.insertTXT(this.clip) 
           this.lastClip = read; //记录上次复制的内容
-          console.log(read)
-          this.qry();
         }
       },
-       openLeft () {
+      openLeft () {
       this.$refs.asideLeft.open()
-    }
+      },
+      clean () {
+        var self = this
+        this.$clipdb.remove({  tag:"unsort" }, { multi: true }, function (err, numRemoved) {
+        // numRemoved = 1
+        self.clipList = []
+        self.showToast("清除"+numRemoved+"条数据")
+
+        });
+      },
+      showToast (txt) {
+        this.n3Toast({
+          text: txt,
+          type: 'success',
+          placement: 'bottom',
+          closeOnClick : true,
+          duration:1000
+        })
+      },
+      copyContent (e){
+       this.$electron.clipboard.writeText(e.content)
+       this.showToast("复制成功")
+      }
+    },
+    filters: {
+      date:function (input) {
+          var d = new Date(input);
+          var year = d.getFullYear();
+          var month = d.getMonth() + 1;
+          var day = d.getDate() <10 ? '0' + d.getDate() : '' + d.getDate();
+          var hour = d.getHours();
+          var minutes = d.getMinutes();
+          var seconds = d.getSeconds();
+          return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+      }
     }
   }
+  
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body { font-family: 'Source Sans Pro', sans-serif; }
-
-  #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
-    height: 100vh;
-    padding: 60px 80px;
-    width: 100vw;
-  }
-
-  #logo {
-    height: auto;
-    margin-bottom: 20px;
-    width: 420px;
-  }
-
-  main {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  main > div { flex-basis: 50%; }
-
-  .left-side {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .welcome {
-    color: #555;
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
-
-  .title {
-    color: #2c3e50;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 6px;
-  }
-
-  .title.alt {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .doc p {
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .doc button {
-    font-size: .8em;
-    cursor: pointer;
-    outline: none;
-    padding: 0.75em 2em;
-    border-radius: 2em;
-    display: inline-block;
-    color: #fff;
-    background-color: #4fc08d;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    border: 1px solid #4fc08d;
-  }
-
-  .doc button.alt {
-    color: #42b983;
-    background-color: transparent;
-  }
+ 
 </style>
