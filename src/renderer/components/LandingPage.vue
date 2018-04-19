@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div >
     <!--<img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="right-side">
@@ -11,13 +11,12 @@
       </div>
     </main>-->
       <n3-button @click.native="openLeft">N3</n3-button>
-    <n3-aside  placement="left" title="Title" width="350px" ref="asideLeft">
-  <h4>左侧侧边栏</h4>
-  <p>...</p>
-  <p>...</p>
-  <p>...</p>
-  <n3-button @click.native="closeLeft">关闭</n3-button>
-</n3-aside>
+      <n3-aside  placement="left" title="标签" width="150px" ref="asideLeft">
+        <p>...</p>
+        <p>...</p>
+        <p>...</p>
+        <n3-button @click.native="closeLeft">关闭</n3-button>
+      </n3-aside>
   </div>
 </template>
 

@@ -1,14 +1,14 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\WG\install\yarn\bin\yarn.js run dev
+  D:\soft\node\node.exe D:\soft\yarn\bin\yarn.js run dev\
 
 PATH: 
-  C:\Program Files (x86)\Intel\iCLS Client\;D:\CSII\Install\python\Scripts\;D:\CSII\Install\python\;C:\Program Files\Java\jdk1.8.0_131\jre\bin;C:\Program Files\Java\jdk1.8.0_131\bin;D:\app\WG\product\11.2.0\dbhome_1\bin;C:\Users\WG\Oracle\product\11.2.0\dbhome_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\MySQL\MySQL Utilities 1.6\;D:\CSII\Install\apache-maven-3.1.0\bin;D:\CSII\Install\TortoiseSVN\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;D:\CSII\Install\loadrunner\strawberry-perl\perl\bin;D:\install\Vim\vim80;D:\CSII\Install\SDK\platform-tools;D:\CSII\Install\SDK\tools;C:\Program Files\nodejs\;D:\CSII\Install\node\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\WG\install\yarn\bin\;C:\Users\WG\install\Git\cmd;C:\Users\WG\install\Git\mingw64\bin;C:\Users\WG\install\Git\usr\bin;C:\Users\WG\AppData\Local\Microsoft\WindowsApps;C:\Users\WG\AppData\Local\atom\bin;C:\Users\WG\install\Microsoft VS Code\bin;C:\Users\WG\AppData\Local\Microsoft\WindowsApps;C:\Users\WG\AppData\Roaming\npm;C:\Users\WG\AppData\Local\Yarn\bin
+  C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\soft\svn\bin;D:\soft\apache-maven-3.3.9\bin\; C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files\Java\jdk1.8.0_162\jre\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;D:\soft\Git\cmd;D:\soft\Git\mingw64\bin;D:\soft\Git\usr\bin;D:\soft\node\;D:\soft\svnServer\bin;D:\soft\yarn\bin\;D:\soft\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;D:\soft\Fiddler;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Local\Yarn\bin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  8.9.3
+  8.11.0
 
 Platform: 
   win32 x64
@@ -37,7 +37,10 @@ npm manifest:
       "postinstall": ""
     },
     "dependencies": {
+      "N3-components": "^2.4.4",
       "axios": "^0.16.1",
+      "element-ui": "^2.3.4",
+      "n3": "^0.11.3",
       "nedb": "^1.8.0",
       "nedb-promises": "^1.2.0",
       "vue": "^2.3.3",
@@ -97,6 +100,13 @@ Lockfile:
   "@types/node@^8.0.24":
     version "8.10.7"
     resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-8.10.7.tgz#40c0058c115bd42ee9bf35d7a217eeef1acd2716"
+  
+  N3-components@^2.4.4:
+    version "2.4.4"
+    resolved "http://registry.npm.taobao.org/N3-components/download/N3-components-2.4.4.tgz#2802c39063bd79911abb2b3acd9db4db8fcb9973"
+    dependencies:
+      velocity-animate "^1.2.3"
+      vue-focus "^2.1.0"
   
   abbrev@1:
     version "1.1.1"
@@ -331,6 +341,12 @@ Lockfile:
   async-each@^1.0.0:
     version "1.0.1"
     resolved "http://registry.npm.taobao.org/async-each/download/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
+  
+  async-validator@~1.8.1:
+    version "1.8.2"
+    resolved "http://registry.npm.taobao.org/async-validator/download/async-validator-1.8.2.tgz#b77597226e96242f8d531c0d46ae295f62422ba4"
+    dependencies:
+      babel-runtime "6.x"
   
   async@0.2.10, async@~0.2.6:
     version "0.2.10"
@@ -567,6 +583,10 @@ Lockfile:
   babel-helper-to-multiple-sequence-expressions@^0.1.1:
     version "0.1.1"
     resolved "http://registry.npm.taobao.org/babel-helper-to-multiple-sequence-expressions/download/babel-helper-to-multiple-sequence-expressions-0.1.1.tgz#5f1b832b39e4acf954e9137f0251395c71196b35"
+  
+  babel-helper-vue-jsx-merge-props@^2.0.0:
+    version "2.0.3"
+    resolved "http://registry.npm.taobao.org/babel-helper-vue-jsx-merge-props/download/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
   
   babel-helpers@^6.24.1:
     version "6.24.1"
@@ -1129,7 +1149,7 @@ Lockfile:
       mkdirp "^0.5.1"
       source-map-support "^0.4.15"
   
-  babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+  babel-runtime@6.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
     version "6.26.0"
     resolved "http://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
     dependencies:
@@ -2157,6 +2177,10 @@ Lockfile:
     version "0.4.2"
     resolved "http://registry.npm.taobao.org/deep-extend/download/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
   
+  deepmerge@^1.2.0:
+    version "1.5.2"
+    resolved "http://registry.npm.taobao.org/deepmerge/download/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
+  
   define-properties@^1.1.2:
     version "1.1.2"
     resolved "http://registry.npm.taobao.org/define-properties/download/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -2465,6 +2489,16 @@ Lockfile:
       "@types/node" "^8.0.24"
       electron-download "^3.0.1"
       extract-zip "^1.0.3"
+  
+  element-ui@^2.3.4:
+    version "2.3.4"
+    resolved "http://registry.npm.taobao.org/element-ui/download/element-ui-2.3.4.tgz#d6d6b057a4acf4caa5e9fd9f1a78bd89c8845e4f"
+    dependencies:
+      async-validator "~1.8.1"
+      babel-helper-vue-jsx-merge-props "^2.0.0"
+      deepmerge "^1.2.0"
+      normalize-wheel "^1.0.1"
+      throttle-debounce "^1.0.1"
   
   elliptic@^6.0.0:
     version "6.4.0"
@@ -4228,7 +4262,7 @@ Lockfile:
     version "1.0.1"
     resolved "http://registry.npm.taobao.org/longest/download/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
   
-  loose-envify@^1.0.0:
+  loose-envify@^1.0.0, loose-envify@^1.2.0:
     version "1.3.1"
     resolved "http://registry.npm.taobao.org/loose-envify/download/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
     dependencies:
@@ -4507,6 +4541,10 @@ Lockfile:
       lodash.merge "^3.3.2"
       log-update "^1.0.2"
   
+  n3@^0.11.3:
+    version "0.11.3"
+    resolved "http://registry.npm.taobao.org/n3/download/n3-0.11.3.tgz#8e587495240dd21408c2c3aae385ec1651a837f8"
+  
   nan@^2.3.0:
     version "2.10.0"
     resolved "http://registry.npm.taobao.org/nan/download/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
@@ -4690,6 +4728,10 @@ Lockfile:
       prepend-http "^1.0.0"
       query-string "^4.1.0"
       sort-keys "^1.0.0"
+  
+  normalize-wheel@^1.0.1:
+    version "1.0.1"
+    resolved "http://registry.npm.taobao.org/normalize-wheel/download/normalize-wheel-1.0.1.tgz#aec886affdb045070d856447df62ecf86146ec45"
   
   npm-run-path@^2.0.0:
     version "2.0.2"
@@ -6410,6 +6452,10 @@ Lockfile:
       fstream "^1.0.2"
       inherits "2"
   
+  throttle-debounce@^1.0.1:
+    version "1.0.1"
+    resolved "http://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-1.0.1.tgz#dad0fe130f9daf3719fdea33dc36a8e6ba7f30b5"
+  
   throttleit@0.0.2:
     version "0.0.2"
     resolved "http://registry.npm.taobao.org/throttleit/download/throttleit-0.0.2.tgz#cfedf88e60c00dd9697b61fdd2a8343a9b680eaf"
@@ -6742,6 +6788,10 @@ Lockfile:
     version "1.1.2"
     resolved "http://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   
+  velocity-animate@^1.2.3:
+    version "1.5.1"
+    resolved "http://registry.npm.taobao.org/velocity-animate/download/velocity-animate-1.5.1.tgz#606837047bab8fbfb59a636d1d82ecc3f7bd71a6"
+  
   vendors@^1.0.0:
     version "1.0.1"
     resolved "http://registry.npm.taobao.org/vendors/download/vendors-1.0.1.tgz#37ad73c8ee417fb3d580e785312307d274847f22"
@@ -6763,6 +6813,12 @@ Lockfile:
   vue-electron@^1.0.6:
     version "1.0.6"
     resolved "http://registry.npm.taobao.org/vue-electron/download/vue-electron-1.0.6.tgz#e798e03180b8933539defe31f92e53b9242b9406"
+  
+  vue-focus@^2.1.0:
+    version "2.1.0"
+    resolved "http://registry.npm.taobao.org/vue-focus/download/vue-focus-2.1.0.tgz#7a0337ce9074d5ef03d15a4b5b862cf45e5e04e3"
+    dependencies:
+      loose-envify "^1.2.0"
   
   vue-hot-reload-api@^2.2.0:
     version "2.3.0"
@@ -7108,17 +7164,14 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 1
-  Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c node .electron-vue/dev-runner.js
-  Directory: D:\My-way\electron-clipboard
-  Output:
-  
-      at ProcessTermError.MessageError (C:\Users\WG\install\yarn\lib\cli.js:186:110)
-      at new ProcessTermError (C:\Users\WG\install\yarn\lib\cli.js:226:113)
-      at ChildProcess.<anonymous> (C:\Users\WG\install\yarn\lib\cli.js:30281:17)
-      at emitTwo (events.js:126:13)
-      at ChildProcess.emit (events.js:214:7)
-      at maybeClose (internal/child_process.js:925:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
+  Error: Command "dev\\" not found. Did you mean "dev"?
+      at new MessageError (D:\soft\yarn\lib\cli.js:186:110)
+      at D:\soft\yarn\lib\cli.js:87307:17
+      at Generator.next (<anonymous>)
+      at step (D:\soft\yarn\lib\cli.js:98:30)
+      at D:\soft\yarn\lib\cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (D:\soft\yarn\lib\cli.js:23451:28)
+      at D:\soft\yarn\lib\cli.js:95:12
+      at runCommand (D:\soft\yarn\lib\cli.js:87312:22)
+      at Object.<anonymous> (D:\soft\yarn\lib\cli.js:87412:14)

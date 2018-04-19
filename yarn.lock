@@ -4450,6 +4450,10 @@ multispinner@^0.2.1:
     lodash.merge "^3.3.2"
     log-update "^1.0.2"
 
+n3@^0.11.3:
+  version "0.11.3"
+  resolved "http://registry.npm.taobao.org/n3/download/n3-0.11.3.tgz#8e587495240dd21408c2c3aae385ec1651a837f8"
+
 nan@^2.3.0:
   version "2.10.0"
   resolved "http://registry.npm.taobao.org/nan/download/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
