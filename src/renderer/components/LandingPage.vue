@@ -11,21 +11,37 @@
           </div>
 
       <!-- 侧栏 -->
-      <n3-aside  placement="left" title="标签" width="150px" ref="asideLeft" :header="false">
-        <p>...</p>
-        <p>...</p>
-        <p>...</p>
+      <n3-aside  placement="left" title="标签" width="150px" ref="asideLeft" :header="false"> 
+          <div></div>
+          <div></div>
       </n3-aside>
      <!-- 剪切板 -->
-     <div style="height:450px;overflow:scroll;overflow-x:hidden;">
+        <n3-modal  effect="zoom" width="300px" ref="customModal">
+          <div slot="header">
+          </div>
+          <div slot="body" style="overflow:auto">
+            {{contentShow}}
+          </div>
+          <div slot="footer">
+          </div>
+        </n3-modal>
+
+     <n3-card style="height:50px;padding:10px 10px 20px 10px;margin:10px;text-align:center;" :hover="true"  v-if="clipList.length == 0">
+            快去复制吧~
+    </n3-card>
+     <div style="height:450px;overflow:scroll;overflow-x:hidden;::-webkit-scrollbar" v-if="clipList.length != 0">
         <n3-card style="padding:10px 10px 20px 10px;margin:10px" :hover="true" v-for="(item, index)  in clipList">
-            <p v-on:click="copyContent(item)">{{item.content}}</p>
+            <p v-on:click="copyContent(item)" v-show="!item.showTotal">{{item.content | hideFliter}}</p> 
+            
             <div style="">
-              <p style="font-size:12px;float:left">{{item.date | date}}</p>
+              <p style="font-size:12px;float:left"  v-bind:style="index, clipList| colorFliter">{{item.date | date}}</p>
+              <n3-icon type="trash-o" style="float:right;cursor:pointer;margin-left:10px" ></n3-icon>
               <n3-icon type="star-o" style="float:right;cursor:pointer" ></n3-icon>
+              <p style="float:right;cursor:pointer;margin-right:10px;font-size:12px;color:blue" v-if="item.content.length>100" @click="showMore(item.content)">show more</p>
             </div>
         </n3-card> 
     </div>
+    
 
   
   </div>
@@ -33,6 +49,7 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
+
 
   export default {
     name: 'landing-page',
@@ -42,7 +59,8 @@
                 interval:{},
                 clip:"",
                 lastClip:{},
-                clipList:[]
+                clipList:[],
+                contentShow:""
             };
         },
     mounted(){
@@ -69,7 +87,7 @@
           });
       },
       qry () {
-        var self =this
+        var self = this
           // this.$clipdb.find({ tag:"unsort"}, function (err, docs) {
           //   self.clipList = docs
           // });
@@ -97,7 +115,9 @@
       },
       clean () {
         var self = this
-        this.$clipdb.remove({  tag:"unsort" }, { multi: true }, function (err, numRemoved) {
+        // this.$clipdb.remove({  tag:"unsort" }, { multi: true }, function (err, numRemoved) {
+        this.$clipdb.remove({ }, { multi: true }, function (err, numRemoved) {
+          
         // numRemoved = 1
         self.clipList = []
         self.showToast("清除"+numRemoved+"条数据")
@@ -116,6 +136,12 @@
       copyContent (e){
        this.$electron.clipboard.writeText(e.content)
        this.showToast("复制成功")
+      },
+      showMore (e){
+
+        this.contentShow = e;
+        this.$refs.customModal.open()
+
       }
     },
     filters: {
@@ -128,6 +154,39 @@
           var minutes = d.getMinutes();
           var seconds = d.getSeconds();
           return  year+ '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+      },
+      colorFliter : function(input,clipList){
+              var color = (clipList.length - input)%5;
+              
+              if(color == 0){
+                return {
+                   color:"rgb(75,194,112)"
+                };
+              }else if (color == 1){
+                return {
+                   color:"rgb(218, 233, 37 )"
+                };
+              }else if(color == 2){
+                return {
+                   color:"rgb(20, 121 ,211)"
+                };
+              }else if(color == 3){
+                return {
+                   color:"rgb(255 ,128 ,128 )"
+                };
+              }else if(color == 4){
+                return {
+                   color:"rgb(21 ,159, 238)"
+                };
+              }
+      },
+      hideFliter:function(input , isShow){
+        if(input.length >100 ){ //超出限制
+            return input.substr(0,100) + "...";            
+        }
+        return input;
+        
+
       }
     }
   }
